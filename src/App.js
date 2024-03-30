@@ -1,5 +1,6 @@
 import './App.css';
 import { useState } from 'react';
+import wizardGif from "./assests/wizaart-img.56787174.gif"
 
 function App() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -33,7 +34,8 @@ function App() {
   return (
     <div onMouseMove={handleMouseMove} style={{ height: '100vh' }}>
     <img
-      src="https://www.wizard.financial/static/media/wizaart-img.56787174.gif"
+      // src="https://www.wizard.financial/static/media/wizaart-img.56787174.gif"
+      src={wizardGif}
       alt="wizard"
       style={imgStyle}
     />
