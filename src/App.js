@@ -4,6 +4,7 @@ import wizardGif from "./assests/wizaart-img.56787174.gif"
 
 function App() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [transitionEnabled, setTransitionEnabled] = useState(false);
 
   const imgStyle = {
     width: '100px',
@@ -11,35 +12,29 @@ function App() {
     position: 'fixed',
     left: position.x,
     top: position.y,
-    transition: 'transform 0.5s ease',
+    transition: transitionEnabled ? 'left 1.5s ease, top 1.5s ease' : 'none',
   };
 
-  const handleMouseMove = (event) => {
+  const handleClick = (event) => {
     const newX = event.clientX;
     const newY = event.clientY;
-  
-    const dx = newX - position.x;
-    const dy = newY - position.y;
-    
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    const speed = distance / 5000; 
 
-    const newLeft = position.x + dx * speed;
-    const newTop = position.y + dy * speed;
-  
-    setPosition({ x: newLeft, y: newTop });
+    setPosition({ x: newX, y: newY });
+    setTransitionEnabled(true);
+
+    setTimeout(() => {
+      setTransitionEnabled(false);
+    }, 1500); 
   };
-  
 
   return (
-    <div onMouseMove={handleMouseMove} style={{ height: '100vh' }}>
-    <img
-      // src="https://www.wizard.financial/static/media/wizaart-img.56787174.gif"
-      src={wizardGif}
-      alt="wizard"
-      style={imgStyle}
-    />
-  </div>
+    <div onClick={handleClick} style={{ height: '100vh', cursor: 'pointer' }}>
+      <img
+        src={wizardGif}
+        alt="wizard"
+        style={imgStyle}
+      />
+    </div>
   );
 }
 
